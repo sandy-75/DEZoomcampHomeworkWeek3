@@ -19,26 +19,11 @@ FROM trips_data_all.external_fhv_tripdata_2019;
 -- efficient
 
 -- Homework Question 4
--- B00987
-SELECT COUNT(*)
-FROM 'dtc-de-339104.trips_data_all.external_tripdata_2019_partitioned_clustered'
+SELECT COUNT(*) 
+FROM `dtc-de-339104.trips_data_all.external_fhv_tripdata_2019_partitioned_clustered` 
 WHERE DATE(dropoff_datetime) BETWEEN '2019-01-01'  AND '2019-03-31'
-AND dispatching_base_num = 'B00987'
-    --  (returns count=6427, estimated=400.1MB, actual=120.6MB)
-
--- B02060
-SELECT COUNT(*)
-FROM 'dtc-de-339104.trips_data_all.external_tripdata_2019_partitioned_clustered'
-WHERE DATE(dropoff_datetime) BETWEEN '2019-01-01'  AND '2019-03-31'
-AND dispatching_base_num = 'B02060'
-    --  (returns count=19330, estimated=400.1MB, actual=132.2MB)
-
--- B02279
-SELECT COUNT(*)
-FROM 'dtc-de-339104.trips_data_all.external_tripdata_2019_partitioned_clustered'
-WHERE DATE(dropoff_datetime) BETWEEN '2019-01-01'  AND '2019-03-31'
-AND dispatching_base_num = 'B02279'
-    --  (returns count=886, estimated=400.1MB, actual=132.2MB)
+AND (dispatching_base_num = 'B00987' OR dispatching_base_num = 'B02060' OR dispatching_base_num = 'B02279')
+    --  (returns count=26643, estimated=400.1MB, actual=134.2MB)
 
 -- Homework Question 5
 -- Cluster on dispatch_num see https://learningdataengineering540969211.wordpress.com/2022/02/14/week-3-de-zoomcamp-3-1-1-homework/
